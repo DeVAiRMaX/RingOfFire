@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "ringoffire-12dd0": {
+      "hosting": {
+        "ringoffire": [
+          "ringoffire-12dd0"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "ringoffire-12dd0"
+  }
+}

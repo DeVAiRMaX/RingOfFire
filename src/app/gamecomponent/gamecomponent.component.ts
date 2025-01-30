@@ -1,11 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Game } from '../models/game';
 import { PlayerComponent } from '../player/player.component';
 import { DialogAddPlayerComponent } from '../dialog-add-player/dialog-add-player.component';
 import { MaterialModule } from '../../modules/material.module';
 import { MatDialog } from '@angular/material/dialog';
 import { GameInfoComponent } from "../game-info/game-info.component";
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 
 
@@ -21,8 +22,17 @@ export class GamecomponentComponent {
   game: Game = new Game();
   currentCard: any;
 
-  constructor(public dialog: MatDialog) {
+  constructor(public dialog: MatDialog, private firestore: AngularFirestore) { }
+
+  ngOnInit(): void {
     this.newGame();
+    this
+      .firestore
+      .collection('games')
+      .valueChanges()
+      .subscribe((game) => {
+        console.log(game);
+      });
   }
 
   newGame() {
@@ -49,7 +59,7 @@ export class GamecomponentComponent {
     const dialogRef = this.dialog.open(DialogAddPlayerComponent);
 
     dialogRef.afterClosed().subscribe(name => {
-      if (name &&name.length > 0) {
+      if (name && name.length > 0) {
         this.game.players.push(name);
       }
     });
