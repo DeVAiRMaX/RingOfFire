@@ -31,15 +31,15 @@
     <!-- picked up card animation-->
     <img
       (click)="takeCard()"
-      *ngIf="pickupCardanimation"
+      *ngIf="game.pickupCardanimation"
       class="pick-card"
       style="right: 40px"
-      src="./assets/img/cards/{{ currentCard }}.png"
+      src="./assets/img/cards/{{ game.currentCard }}.png"
     />
   </div>
 </div>
 
-<app-game-info [card]="currentCard"></app-game-info>
+<app-game-info [card]="game.currentCard"></app-game-info>
 
 <button mat-fab color="primary" class="add-button" (click)="openDialog()">
   <mat-icon>add</mat-icon>
